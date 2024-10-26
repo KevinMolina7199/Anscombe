@@ -1,6 +1,6 @@
 # Anscombe
 
-![Logo de la Universidad](https://ejemplo.com/logo.png)
+![Logo de la Universidad](https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_Universidad_Polit%C3%A9cnica_Salesiana_del_Ecuador.png)
 
 ## Universidad Politécnica Salesiana  
 **Carrera**: Computación  
