@@ -1,0 +1,62 @@
+---
+title: "MINERIA_DE_DATOS_1"
+author: "Kevin Molina"
+date: "2024-09-23"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Acerca de la Regresión Lineal:
+
+La regresión lineal es una técnica estadística que se utiliza para modelar la relación entre una variable dependiente $y$ y una o más variables independientes $x$. El objetivo principal de la regresión lineal es ajustar una línea (o un plano, en el caso de múltiples variables) que minimiza la suma de los errores cuadrados (diferencias entre los valores observados y los valores predichos por el modelo).
+
+## Cómo Funciona el Método:
+
+1.  **Modelo de Regresión**:
+    -   La regresión lineal se basa en la ecuación de la línea recta: $$
+        y = \beta_0 + \beta_1 x + \epsilon
+        $$ donde:
+        -   $y$ es la variable dependiente.
+        -   $x$ es la variable independiente.
+        -   $\beta_0$ es el intercepto de la línea.
+        -   $\beta_1$ es la pendiente de la línea.
+        -   $\epsilon$ es el término de error que captura la variabilidad no explicada por el modelo.
+2.  **Estimación de Parámetros**:
+    -   Los coeficientes $\beta_0$ y $\beta_1$ se estiman utilizando el método de mínimos cuadrados, que busca minimizar la suma de los cuadrados de las diferencias entre los valores observados y los predichos.
+3.  **Visualización**:
+    -   En el gráfico, los puntos representan los datos observados, mientras que la línea de regresión muestra la tendencia general de los datos. La adición de la línea de regresión ayuda a visualizar cómo $y$ cambia con respecto a $x$.
+4.  **Interpretación**:
+    -   Un coeficiente positivo $\beta_1$ indica que a medida que $x$ aumenta, $y$ también tiende a aumentar, mientras que un coeficiente negativo indica lo contrario.
+
+## Aplicación en el Dataset "Circle"
+
+En este caso, se utiliza la regresión lineal para modelar la relación entre las variables $x$ e $y$ en el dataset "circle" del Datasaurus Dozen. A continuación, se presenta el gráfico que muestra los puntos de datos junto con la línea de regresión ajustada. \# Cargamos las librerias
+
+```{r}
+# Cargar librerías necesarias para la visualización y manipulación de datos
+
+library(ggplot2)  # Para crear gráficos
+library(datasauRus)  # Para acceder al dataset Datasaurus Dozen
+library(dplyr)  # Para la manipulación de datos (incluye %>%)
+print("Listo")  # Mensaje para confirmar que se cargaron las librerías
+
+```
+
+# Graficar el dataset específico: "Circle"
+
+```{r}
+# Filtrar el dataset "circle" y graficar
+circle_data <- datasaurus_dozen %>% filter(dataset == "circle")  # Filtrar solo los datos del dataset "circle"
+ggplot(circle_data, aes(x = x, y = y)) +
+  geom_point() +                                     # Agregar los puntos de datos
+  geom_smooth(method = "lm", formula = y ~ x, se = FALSE, color = "blue") +  # Añadir la línea de regresión
+  theme_void() +                                    # Usar un tema sin ejes ni fondo
+  ggtitle("Gráfico del Dataset 'Correspondiente-Circle-Kevin Molina' con Regresión") +  # Título del gráfico
+  theme(legend.position = "none")                   # Ocultar la leyenda
+
+```

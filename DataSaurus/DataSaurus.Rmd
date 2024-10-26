@@ -1,0 +1,63 @@
+---
+title: "MINERIA_DE_DATOS_1"
+author: "Kevin Molina"
+date: "2024-09-23"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Cargamos las librerias
+
+```{r}
+# Cargar librerías necesarias para la visualización y manipulación de datos
+
+library(ggplot2)  # Para crear gráficos
+library(datasauRus)  # Para acceder al dataset Datasaurus Dozen
+library(dplyr)  # Para la manipulación de datos (incluye %>%)
+print("Listo")  # Mensaje para confirmar que se cargaron las librerías
+
+```
+
+# Mostramos el resumen
+
+```{r}
+# Calcular el resumen estadístico de cada dataset en el Datasaurus Dozen
+datasaurus_dozen %>%
+    group_by(dataset) %>%
+    summarize(
+        mean_x = mean(x),
+        mean_y = mean(y),
+        std_dev_x = sd(x),
+        std_dev_y = sd(y),
+        corr_x_y = cor(x, y)
+    )
+```
+
+# Graficamos
+
+```{r}
+# Crear un gráfico de dispersión para el Datasaurus Dozen
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset)) +
+  geom_point() +
+  theme_void() +
+  theme(legend.position = "none") +
+  facet_wrap(~dataset, ncol = 3)
+```
+
+# Graficar el Datasaurus Dozen con líneas de regresión
+
+```{r}
+# Graficar el Datasaurus Dozen con líneas de regresión lineales
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset)) +
+  geom_point() +  # Agregar los puntos de datos
+  geom_smooth(method = "lm", se = FALSE) +  # Añadir líneas de regresión sin intervalo de confianza
+  theme_void() +  # Usar un tema sin ejes ni fondo
+  theme(legend.position = "none") +  # Ocultar la leyenda
+  facet_wrap(~dataset, ncol = 3) +  # Crear subgráficos por cada dataset
+  ggtitle("Gráfico del Datasaurus Dozen con Regresión")  # Añadir un título al gráfico
+```
